@@ -10,6 +10,8 @@ import { CoffeeService } from '../coffee.service';
 export class CoffeeListComponent implements OnInit {
 
   coffees: Array<Coffee> = [];
+  origen: number = 0;
+  blend: number = 0;
 
   constructor(private coffeeService: CoffeeService) { }
 
@@ -20,6 +22,14 @@ export class CoffeeListComponent implements OnInit {
   getCoffees(): void {
     this.coffeeService.getCoffees().subscribe((coffees) => {
       this.coffees = coffees;
+      for (let elemento of this.coffees){
+        if(elemento['tipo'] == 'Blend'){
+          this.blend++;
+        }
+        if(elemento['tipo'] == 'Café de Origen'){
+          this.origen++;
+        }
+      }
     });
   }
 
